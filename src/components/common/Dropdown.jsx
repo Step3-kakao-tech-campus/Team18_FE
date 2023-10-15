@@ -1,3 +1,4 @@
+import PropTypes, { string } from "prop-types";
 import { useState } from "react";
 import useOutsideRef from "../../hooks/useOutSideRef";
 
@@ -12,16 +13,16 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
   };
 
   return (
-    <div className="w-[12rem] color-green-900 relative" ref={outSideRef}>
+    <div className="w-[12rem] color-green-900" ref={outSideRef}>
       <div
         className="flex w-full border-t-2 border-solid p-4 justify-between items-center border-green-700 font-semibold"
         onClick={() => setIsOpen((prev) => !prev)}
       >
         <span>{selected}</span>
-        <span className="material-symbols-outlined">expand_more</span>
+        <span className="material-symbols-outlined"> expand_more </span>
       </div>
-      {isOpen && (
-        <div className="flex flex-col gap-2 bg-green-100 overflow-y-auto max-h-[200px] w-full text-sm absolute top-full left-0 z-10">
+      {isOpen ? (
+        <div className="flex flex-col gap-2 bg-green-100 w-full text-sm">
           {options.map((option) => (
             <button
               key={option}
@@ -32,9 +33,17 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
             </button>
           ))}
         </div>
+      ) : (
+        <></>
       )}
     </div>
   );
+};
+
+Dropdown.propTypes = {
+  options: PropTypes.arrayOf(string),
+  selected: PropTypes.string,
+  onSelectedChange: PropTypes.func,
 };
 
 export default Dropdown;
