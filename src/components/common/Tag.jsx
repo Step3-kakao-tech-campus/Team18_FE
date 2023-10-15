@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 const tagType = {
   Sport: "bg-blue-500 text-white",
   Game: "bg-teal-500 text-white",
@@ -10,20 +8,22 @@ const tagType = {
   Baseball: "bg-rose-500 text-white",
   LOL: "bg-lime-500 text-white",
   Youtuber: "bg-emerald-500 text-white",
+  Mentor: "bg-blue-400 text-black",
+  Mentee: "bg-yellow-100 text-black",
 };
 
 const Tag = ({ children, ...props }) => {
-  const tagStyle = `${tagType[children]} py-1 px-2 text-xs rounded-lg`;
+  const tagStyle = `${
+    tagType[children]
+  } py-1 px-2 text-xs rounded-lg border-2 ${
+    children.includes("Ment") ? "border-black" : "border-[#0000]"
+  }`;
 
   return (
     <span className={tagStyle} {...props}>
       {children}
     </span>
   );
-};
-
-Tag.propTypes = {
-  children: PropTypes.string,
 };
 
 export default Tag;
